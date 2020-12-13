@@ -34,11 +34,9 @@ const useStyles = makeStyles((theme) => ({
 export default function ListJobs(props) {
     const classes = useStyles();
     const [currentPage, setCurrentPage] = useState(1);
-
     const onChangePage = (page) => {
         setCurrentPage(page);
     }
-
     const paginatedJobs = () => {
         return props.jobs.slice((currentPage - 1) * props.jobsPerPage, currentPage * props.jobsPerPage)
     }

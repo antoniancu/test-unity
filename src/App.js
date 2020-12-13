@@ -9,7 +9,6 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 function App() {
     const jobsPerPage = 9;
-
     const [state, setState] = useState({
         apidata: {},
         loading: false,
@@ -17,7 +16,6 @@ function App() {
         cityFilter: '',
         searchFilter: '',
     });
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -64,7 +62,6 @@ function App() {
             return job.location.name.includes(state.cityFilter)
         })
     }
-
 
     return (
       <React.Fragment>

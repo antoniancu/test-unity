@@ -55,7 +55,6 @@ export default function Job(props) {
               </Button>
           </CardActions>
       </Card>
-
     );
 }
 

@@ -25,11 +25,9 @@ export default function SelectCity(props) {
     const [state, setState] = React.useState({
         city: '',
     });
-
-    const citiesOptions = props.cities.map((city, index) =>
+    const renderCitiesOptions = props.cities.map((city, index) =>
       <option key={index} className={classes.white} aria-label="None" value={city}>{city}</option>
     )
-
     const handleChange = (event) => {
         const name = event.target.name;
         setState({
@@ -54,7 +52,7 @@ export default function SelectCity(props) {
           >
               <option className={classes.white} aria-label="None" value="">Anywhere</option>
               {/* API returns a value called "All Locations" - has high potential to be confusion to job seekers, consider changing it to Remote, as All Locations should display all jobs in any city*/}
-              {citiesOptions}
+              {renderCitiesOptions}
 
           </Select>
       </FormControl>
