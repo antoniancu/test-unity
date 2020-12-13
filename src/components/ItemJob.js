@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Job(props) {
     const classes = useStyles();
     const handleJobLink= () => {
-        window.open(props.absolute_url, "_blank") //to open new page
+        window.open(props.job.absolute_url, "_blank") //to open new page
     }
     return (
       <Card className={classes.card}>
@@ -49,6 +49,7 @@ export default function Job(props) {
               </Typography>
           </CardContent>
           <CardActions>
+              {/*todo: replace this with a link for better SEO*/}
               <Button onClick={handleJobLink} variant="outlined" color="primary" href="#outlined-buttons">
                   Discover this role
               </Button>

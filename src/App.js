@@ -47,19 +47,19 @@ function App() {
     const updateCityFilter = (city) => {
         setState({
             ...state,
-            cityFilter: city
+            cityFilter: city,
         })
     }
-    const updateSearchFilter = (city) => {
+    const updateSearchFilter = (query) => {
         setState({
             ...state,
-            searchFilter: city
+            searchFilter: query
         })
     }
     const filteredJobs = () => {
         return filter(state.apidata.jobs, (job) => {
             if (state.searchFilter) {
-                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter);
+                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name === state.cityFilter;
             }
             return job.location.name.includes(state.cityFilter)
         })
