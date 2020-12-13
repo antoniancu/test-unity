@@ -9,14 +9,13 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 
 function App() {
     const jobsPerPage = 9;
+
     const [state, setState] = useState({
         apidata: {},
         loading: false,
         cities: [],
         cityFilter: '',
         searchFilter: '',
-        pageCount: 1,
-        currentPage: 1,
     });
 
     useEffect(() => {
@@ -26,14 +25,13 @@ function App() {
                     ...state,
                     loading: true,
                 })
-                const { data } = await axios
+                const {data} = await axios
                   .get('https://boards-api.greenhouse.io/v1/boards/unity3d/jobs');
                 setState({
                     ...state,
                     loading: false,
                     apidata: data,
                     cities: sortedUniq(data.jobs.map((job) => job.location.name).sort()),
-                    pageCount: Math.ceil(data.jobs.length/jobsPerPage)
                 });
             } catch {
                 setState({
@@ -43,6 +41,7 @@ function App() {
                 alert('Could not get jobs list')
             }
         }
+
         fetchData();
     }, []);
     const updateCityFilter = (city) => {
@@ -58,33 +57,13 @@ function App() {
         })
     }
     const filteredJobs = () => {
-
         return filter(state.apidata.jobs, (job) => {
             if (state.searchFilter) {
-                const results = job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter);
-                setState({
-                    ...state,
-                    currentPage: 1,
-                    pageCount: results.length/jobsPerPage
-                })
-                return results;
-
+                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter);
             }
             return job.location.name.includes(state.cityFilter)
         })
     }
-
-    const paginatedJobs = () => {
-            return filteredJobs().slice((state.currentPage - 1) * jobsPerPage, state.currentPage * jobsPerPage)
-    }
-
-    const onChangePage = (page) => {
-        setState({
-            ...state,
-            currentPage: page
-        });
-    }
-
 
 
     return (
@@ -95,7 +74,7 @@ function App() {
           <main>
               {state.loading
                 ? <h2>Loading Jobs</h2>
-                : <ListJobs jobs={paginatedJobs()} pageCount={state.pageCount} currentPage={state.currentPage} changePage={onChangePage}/>}
+                : <ListJobs jobs={filteredJobs()} jobsPerPage={jobsPerPage}/>}
           </main>
           <Footer/>
       </React.Fragment>

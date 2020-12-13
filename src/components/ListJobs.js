@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Grid from '@material-ui/core/Grid';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
@@ -33,18 +33,30 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListJobs(props) {
     const classes = useStyles();
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const onChangePage = (page) => {
+        setCurrentPage(page);
+    }
+
+    const paginatedJobs = () => {
+        return props.jobs.slice((currentPage - 1) * props.jobsPerPage, currentPage * props.jobsPerPage)
+    }
+    const pageCount = () => {
+        return Math.ceil(props.jobs.length/props.jobsPerPage)
+    }
 
     return (
       <React.Fragment>
           <Container className={classes.cardGrid} maxWidth="lg" spacing={4}>
               <Grid container spacing={4}>
-                  {props.jobs.map((job) => (
+                  {paginatedJobs().map((job) => (
                     <Grid item key={job.id} xs={12} sm={6} md={4}>
                         <ItemJob job={job}/>
                     </Grid>
                   ))}
               </Grid>
-              <BasicPagination currentPage={props.currentPage} pageCount={props.pageCount} changePage={props.changePage}/>
+              <BasicPagination currentPage={currentPage} pageCount={pageCount()} changePage={onChangePage}/>
           </Container>
       </React.Fragment>
     );
@@ -52,7 +64,5 @@ export default function ListJobs(props) {
 
 ListJobs.propTypes = {
     jobs: PropTypes.array.isRequired,
-    currentPage: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    changePage: PropTypes.func.isRequired
+    jobsPerPage: PropTypes.number.isRequired
 }
