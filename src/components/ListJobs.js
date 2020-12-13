@@ -36,7 +36,7 @@ export default function ListJobs(props) {
 
     return (
       <React.Fragment>
-          <Container className={classes.cardGrid} maxWidth="md">
+          <Container className={classes.cardGrid} maxWidth="lg" spacing={4}>
               <Grid container spacing={4}>
                   {props.jobs.map((job) => (
                     <Grid item key={job.id} xs={12} sm={6} md={4}>
@@ -44,7 +44,7 @@ export default function ListJobs(props) {
                     </Grid>
                   ))}
               </Grid>
-              <BasicPagination/>
+              <BasicPagination currentPage={props.currentPage} pageCount={props.pageCount} changePage={props.changePage}/>
           </Container>
       </React.Fragment>
     );
@@ -52,5 +52,7 @@ export default function ListJobs(props) {
 
 ListJobs.propTypes = {
     jobs: PropTypes.array.isRequired,
-    jobsCount: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    pageCount: PropTypes.number.isRequired,
+    changePage: PropTypes.func.isRequired
 }

@@ -13,13 +13,19 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BasicPagination(props) {
     const classes = useStyles();
+    const handleChange = (event, page) => {
+        props.changePage(page)
+    }
+
     return (
       <div className={classes.root}>
-          <Pagination count={props.pageCount} />
+          <Pagination count={props.pageCount} page={props.currentPage} onChange={handleChange} />
       </div>
     );
 }
 
 BasicPagination.propTypes = {
-    pageCount: PropTypes.number.isRequired
+    pageCount: PropTypes.number.isRequired,
+    currentPage: PropTypes.number.isRequired,
+    changePage: PropTypes.func.isRequired
 }

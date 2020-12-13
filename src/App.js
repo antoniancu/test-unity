@@ -8,12 +8,15 @@ import {sortedUniq, filter} from 'lodash';
 import LinearProgress from "@material-ui/core/LinearProgress";
 
 function App() {
+    const jobsPerPage = 9;
     const [state, setState] = useState({
         apidata: {},
         loading: false,
         cities: [],
         cityFilter: '',
         searchFilter: '',
+        pageCount: 1,
+        currentPage: 1,
     });
 
     useEffect(() => {
@@ -29,7 +32,8 @@ function App() {
                     ...state,
                     loading: false,
                     apidata: data,
-                    cities: sortedUniq(data.jobs.map((job) => job.location.name).sort())
+                    cities: sortedUniq(data.jobs.map((job) => job.location.name).sort()),
+                    pageCount: Math.ceil(data.jobs.length/jobsPerPage)
                 });
             } catch {
                 setState({
@@ -57,13 +61,28 @@ function App() {
 
         return filter(state.apidata.jobs, (job) => {
             if (state.searchFilter) {
-                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter);
+                const results = job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter);
+                setState({
+                    ...state,
+                    currentPage: 1,
+                    pageCount: results.length/jobsPerPage
+                })
+                return results;
+
             }
             return job.location.name.includes(state.cityFilter)
         })
     }
-    const filteredJobsCount = () => {
-       return  filteredJobs.length;
+
+    const paginatedJobs = () => {
+            return filteredJobs().slice((state.currentPage - 1) * jobsPerPage, state.currentPage * jobsPerPage)
+    }
+
+    const onChangePage = (page) => {
+        setState({
+            ...state,
+            currentPage: page
+        });
     }
 
 
@@ -75,8 +94,8 @@ function App() {
           {state.loading ? <LinearProgress/> : null}
           <main>
               {state.loading
-                ? '<h2>Hold on to your hat, cowboy!</h2>'
-                : <ListJobs jobs={filteredJobs()} jobsCount={filteredJobsCount()}/>}
+                ? <h2>Loading Jobs</h2>
+                : <ListJobs jobs={paginatedJobs()} pageCount={state.pageCount} currentPage={state.currentPage} changePage={onChangePage}/>}
           </main>
           <Footer/>
       </React.Fragment>

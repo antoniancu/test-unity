@@ -71,13 +71,14 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         padding: theme.spacing(2, 2),
-        background: "gray",
+        background: theme.palette.common.black,
         [theme.breakpoints.up('md')]: {
             flexDirection: 'row',
             padding: theme.spacing(0, 2),
         },
     },
 }));
+//todo: add a clear button for search and city filters
 
 export default function AppNavBar(props) {
     const classes = useStyles();
