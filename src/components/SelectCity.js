@@ -12,9 +12,6 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '240px'
 
     },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
     white: {
         color: theme.palette.common.white
     }
@@ -53,7 +50,6 @@ export default function SelectCity(props) {
               <option className={classes.white} aria-label="None" value="">Anywhere</option>
               {/* API returns a value called "All Locations" - has high potential to be confusion to job seekers, consider changing it to Remote, as All Locations should display all jobs in any city*/}
               {renderCitiesOptions}
-
           </Select>
       </FormControl>
     );
