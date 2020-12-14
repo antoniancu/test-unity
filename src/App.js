@@ -37,9 +37,11 @@ function App() {
                     ...state,
                     loading: false,
                 });
+                // clean this up in prod, replace with a modal error or some sort of flash message
                 alert('Could not get jobs list')
             }
         }
+
         fetchData();
     }, []);
     const updateCityFilter = (city) => {
@@ -57,7 +59,7 @@ function App() {
     const filteredJobs = () => {
         return filter(state.apidata.jobs, (job) => {
             if (state.searchFilter) {
-                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter) ;
+                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter);
             }
             return job.location.name.includes(state.cityFilter)
         })
@@ -70,7 +72,7 @@ function App() {
           {state.loading ? <LinearProgress/> : null}
           <main>
               {state.loading
-                ?  <Typography variant="h6" noWrap> Retrieving job postings...</Typography>
+                ? <Typography variant="h6" noWrap> Retrieving job postings...</Typography>
                 : <ListJobs jobs={filteredJobs()} jobsPerPage={jobsPerPage}/>}
           </main>
           <Footer/>

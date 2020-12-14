@@ -25,7 +25,8 @@ export default function Footer() {
     return (
       <React.Fragment>
           <footer className={classes.footer}>
-              <Avatar className={classes.avatar} alt="Anton Iancu" src="https://media-exp1.licdn.com/dms/image/C5603AQHhqFHakdfx-w/profile-displayphoto-shrink_200_200/0/1549242972490?e=1613606400&v=beta&t=1tIk3b3Lh3d1UG5atNXM17QnCtU847ujygXw7n9Bfr0" />
+              <Avatar className={classes.avatar} alt="Anton Iancu"
+                      src="https://media-exp1.licdn.com/dms/image/C5603AQHhqFHakdfx-w/profile-displayphoto-shrink_200_200/0/1549242972490?e=1613606400&v=beta&t=1tIk3b3Lh3d1UG5atNXM17QnCtU847ujygXw7n9Bfr0"/>
               <Typography variant="h6" align="center" gutterBottom>
                   Unity Technical Challenge - by <Link color="inherit" href="mailto:anton.iancu@gmail.com"> Anton Iancu </Link>
               </Typography>
