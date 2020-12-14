@@ -14,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
     },
     white: {
         color: theme.palette.common.white
+    },
+    label: {
+        transform: 'translate(14px, 0px) scale(0.75) !important',
+        color: theme.palette.common.white
     }
 }));
 
@@ -36,7 +40,7 @@ export default function SelectCity(props) {
 
     return (
       <FormControl className={classes.formControl} variant='outlined'>
-          <InputLabel className={classes.white} htmlFor="city-native-simple">City</InputLabel>
+          <InputLabel className={classes.label} htmlFor="city-native-simple">City</InputLabel>
           <Select
             className={classes.white}
             native
