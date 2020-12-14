@@ -7,7 +7,6 @@ import BasicPagination from './Pagination';
 import PropTypes from 'prop-types';
 import {isEmpty} from 'lodash';
 import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
 
 const useStyles = makeStyles((theme) => ({
     icon: {
