@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     cardMedia: {
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '100px', // 16:9
     },
     cardContent: {
         flexGrow: 1,
@@ -30,9 +30,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Job(props) {
     const classes = useStyles();
-    const handleJobLink= () => {
-        window.open(props.job.absolute_url, "_blank") //to open new page
-    }
     return (
       <Card className={classes.card}>
           <CardMedia
@@ -49,13 +46,11 @@ export default function Job(props) {
               </Typography>
           </CardContent>
           <CardActions>
-              {/*todo: replace this with a link for better SEO*/}
-              <Button onClick={handleJobLink} variant="outlined" color="primary" href="#outlined-buttons">
+              <Button variant="outlined" color="primary" href={props.job.absolute_url} target="_blank">
                   Discover this role
               </Button>
           </CardActions>
       </Card>
-
     );
 }
 

@@ -6,10 +6,10 @@ import ListJobs from './components/ListJobs'
 import axios from 'axios';
 import {sortedUniq, filter} from 'lodash';
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Typography from "@material-ui/core/Typography";
 
 function App() {
     const jobsPerPage = 9;
-
     const [state, setState] = useState({
         apidata: {},
         loading: false,
@@ -17,7 +17,6 @@ function App() {
         cityFilter: '',
         searchFilter: '',
     });
-
     useEffect(() => {
         async function fetchData() {
             try {
@@ -41,7 +40,6 @@ function App() {
                 alert('Could not get jobs list')
             }
         }
-
         fetchData();
     }, []);
     const updateCityFilter = (city) => {
@@ -59,12 +57,11 @@ function App() {
     const filteredJobs = () => {
         return filter(state.apidata.jobs, (job) => {
             if (state.searchFilter) {
-                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name === state.cityFilter;
+                return job.title.toLowerCase().includes(state.searchFilter.toLowerCase()) && job.location.name.includes(state.cityFilter) ;
             }
             return job.location.name.includes(state.cityFilter)
         })
     }
-
 
     return (
       <React.Fragment>
@@ -73,7 +70,7 @@ function App() {
           {state.loading ? <LinearProgress/> : null}
           <main>
               {state.loading
-                ? <h2>Loading Jobs</h2>
+                ?  <Typography variant="h6" noWrap> Retrieving job postings...</Typography>
                 : <ListJobs jobs={filteredJobs()} jobsPerPage={jobsPerPage}/>}
           </main>
           <Footer/>
