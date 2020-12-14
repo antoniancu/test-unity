@@ -59,7 +59,7 @@ export default function ListJobs(props) {
 
               <Grid container spacing={4}>
                   {paginatedJobs().map((job) => (
-                    <Grid item key={job.id} xs={12} sm={6} md={4}>
+                    <Grid item key={job.id} xs={12} sm={6} md={4} lg={3}>
                         <ItemJob job={job}/>
                     </Grid>
                   ))}

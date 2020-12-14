@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
     },
     cardMedia: {
         paddingTop: '100px', // 16:9
+        backgroundColor: '#d9e4f5',
+        backgroundImage: 'linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%)'
     },
     cardContent: {
         flexGrow: 1,
@@ -34,7 +36,7 @@ export default function Job(props) {
       <Card className={classes.card}>
           <CardMedia
             className={classes.cardMedia}
-            image={`https://source.unsplash.com/283x159/?${props.job.location.name},landmark`}
+            image={`https://source.unsplash.com/283x100/?${props.job.location.name},landmark,${props.job.id}`}
             title="Image title"
           />
           <CardContent className={classes.cardContent}>
@@ -46,7 +48,7 @@ export default function Job(props) {
               </Typography>
           </CardContent>
           <CardActions>
-              <Button variant="outlined" color="primary" href={props.job.absolute_url} target="_blank">
+              <Button variant="outlined" href={props.job.absolute_url} target="_blank">
                   Discover this role
               </Button>
           </CardActions>
