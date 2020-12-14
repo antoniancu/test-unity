@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 import PropTypes from 'prop-types';
 
@@ -19,7 +19,7 @@ export default function BasicPagination(props) {
 
     return (
       <div className={classes.root}>
-          <Pagination count={props.pageCount} page={props.currentPage} onChange={handleChange} />
+          <Pagination count={props.pageCount} page={props.currentPage} onChange={handleChange}/>
       </div>
     );
 }

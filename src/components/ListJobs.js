@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         marginRight: theme.spacing(2),
     },
     jobcount: {
-      marginBottom: theme.spacing(4),
+        marginBottom: theme.spacing(4),
     },
     cardGrid: {
         paddingTop: theme.spacing(8),
@@ -47,15 +47,15 @@ export default function ListJobs(props) {
         return props.jobs.slice((currentPage - 1) * props.jobsPerPage, currentPage * props.jobsPerPage)
     }
     const pageCount = () => {
-        return Math.ceil(props.jobs.length/props.jobsPerPage)
+        return Math.ceil(props.jobs.length / props.jobsPerPage)
     }
 
     return (
       <React.Fragment>
           <Container className={classes.cardGrid} maxWidth="lg" spacing={4}>
               {isEmpty(paginatedJobs())
-                ?  <Typography className={classes.title} variant="h6" noWrap> No jobs found... try a different city or search terms.</Typography>
-                : <Typography className={classes.jobcount} variant="h6" noWrap>  {props.jobs.length} positions available </Typography> }
+                ? <Typography className={classes.title} variant="h6" noWrap> No jobs found... try a different city or search terms.</Typography>
+                : <Typography className={classes.jobcount} variant="h6" noWrap>  {props.jobs.length} positions available </Typography>}
 
               <Grid container spacing={4}>
                   {paginatedJobs().map((job) => (
@@ -66,7 +66,7 @@ export default function ListJobs(props) {
               </Grid>
               {!isEmpty(paginatedJobs())
                 ? <BasicPagination currentPage={currentPage} pageCount={pageCount()} changePage={onChangePage}/>
-                : null }
+                : null}
           </Container>
       </React.Fragment>
     );
